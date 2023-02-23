@@ -65,10 +65,18 @@
 >   <source media="(prefers-color-scheme: light)" srcset="https://github.com/Mqxx/GitHub-Markdown/blob/main/blockquotes/badge/light-theme/info.svg">
 >   <img alt="Info" src="https://github.com/Mqxx/GitHub-Markdown/blob/main/blockquotes/badge/dark-theme/info.svg">
 > </picture><br>
-> At the time of writing, we will work with CMIS Version 3.0.7
+> At the time of writing, we will work with CMIS Version 3.0.7.0 As part of this solution document. CMIS v3.0.7.0-IF001 will be used to demonstrate rolling upgrades using Jenkins and ArgoCD Pipelines.
+
+- Pull **two** images
+  - `ga-307-cmis`
+  - `ga-307-cmis-if001`
 
 ```
 podman pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis
+```
+
+```
+podman pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-if001
 ```
 
 #### Stage CMIS Image to Artifactory
