@@ -58,7 +58,6 @@
 >   <source media="(prefers-color-scheme: light)" srcset="https://github.com/Mqxx/GitHub-Markdown/blob/main/blockquotes/badge/light-theme/tip.svg">
 >   <img alt="Tip" src="https://github.com/Mqxx/GitHub-Markdown/blob/main/blockquotes/badge/dark-theme/tip.svg">
 > </picture><br>
-> Tip
 > You can use `podman` or `docker` depending on > how you have set up your environment.
 
 #### Pull CMIS Image
@@ -66,7 +65,6 @@
 >   <source media="(prefers-color-scheme: light)" srcset="https://github.com/Mqxx/GitHub-Markdown/blob/main/blockquotes/badge/light-theme/info.svg">
 >   <img alt="Info" src="https://github.com/Mqxx/GitHub-Markdown/blob/main/blockquotes/badge/dark-theme/info.svg">
 > </picture><br>
-> Info
 > At the time of writing, we will work with CMIS Version 3.0.7
 
 ```
