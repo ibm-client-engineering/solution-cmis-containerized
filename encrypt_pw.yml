@@ -1,0 +1,37 @@
+- name: Check If Liberty Key Already Exists
+  stat:
+    path: "{{ liberty_data_dir }}/key.xml"
+  register: key_stat
+
+- name: Generate Liberty Encryption Key
+  template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: 50001
+      group: 50000
+  with_items:
+    - { src: "key.xml", dest: "{{ liberty_data_dir }}/key.xml" }
+  when: key_stat.stat.exists == False
+
+- name: Read Encryption Key
+  shell: cat {{ liberty_data_dir }}/key.xml | grep -e value | awk -F '"' '{print $4}'
+  register: enc_key
+
+- name: Set Encryption Key
+  set_fact:
+    liberty_key: "{{ enc_key.stdout }}"
+
+- name: Encrypt Plain Text Passwords
+  command: docker run --rm image/liberty-base:1.0 /opt/ibm/wlp/bin/securityUtility encode --encoding=aes --key={{ liberty_key }} {{ item }}
+  with_items:
+    - "{{ cmis_ldap_saas_bind_pw }}"
+    - "{{ cmis_ldap_saas_truststore_pw }}"
+    - "{{ cmis_os1_db_pw }}"
+    - "{{ cmis_default_truststore_pw }}"
+  register: encrypted_passwords
+
+- set_fact:
+    cmis_ldap_saas_bind_pw_enc: "{{ encrypted_passwords.results[0].stdout }}"
+    cmis_ldap_saas_truststore_pw_enc: "{{ encrypted_passwords.results[1].stdout }}"
+    cmis_os1_db_pw_enc: "{{ encrypted_passwords.results[2].stdout }}"
+    cmis_default_truststore_pw_enc: "{{ encrypted_passwords.results[3].stdout }}"
