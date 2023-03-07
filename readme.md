@@ -8,6 +8,10 @@
 - [Solution Strategy](#solution-strategy)
   - [Overview](#overview)
   - [Building Block View](#building-block-view)
+  - [Deployment](#deployment)
+    - [Pre-Requisites](#pre-requisites)
+      - [Stage Container Images](#stage-container-images)
+        - [Obtain Entitlement Key](#obtain-entitlement-key)
       - [Pull CMIS Image](#pull-cmis-image)
       - [Stage CMIS Image to Artifactory](#stage-cmis-image-to-artifactory)
       - [](#)
@@ -61,16 +65,19 @@
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
 - ConfigMaps
 - `cmis-ldap`
   - This configmap will hold the directory service configuration file.
 `ibm_ldap_odsee_1.xml`
 
-```
+
 Note on encrypting passwords. See attached sample task used to encrypt sensitive passwords.
 
 - Volumes
+
 `cmis-config-store` - 1Gb
+
 `cmis-log-store` - 5Gb
 
 
